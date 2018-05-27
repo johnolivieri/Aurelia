@@ -1,29 +1,15 @@
-import { bindable, inject } from 'aurelia-framework';
+import { Router, RouterConfiguration } from 'aurelia-router';
 
-import { Book } from './book';
-import { BookApi } from './book-api';
-
-@inject(BookApi)
 export class App {
-  books: Book[];
-  bookTitle: string;
+  router: Router;
 
-  constructor(private bookApi: BookApi) {
-    this.books = [];
-    this.bookTitle = '';
-  }
+  configureRouter(config: RouterConfiguration, router: Router) {
+    this.router = router;
 
-  bind() {
-    this.bookApi.getBooks().then(savedBooks => this.books = savedBooks);
-  }
-
-  addBook(): void {
-    this.books.push({title: this.bookTitle});
-    this.bookTitle = '';
-
-    console.log('Book List:');
-    this.books.forEach(book => {
-      console.log(`${book.title}`);
-    });
+    config.title = 'my-books';
+    config.map([
+      { route: ['', 'home'], name: 'home', moduleId: 'index' },
+      { route: 'books', name: 'books', moduleId: './resources/elements/books' }
+    ]);
   }
 }

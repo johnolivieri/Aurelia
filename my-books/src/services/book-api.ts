@@ -1,7 +1,7 @@
 import { inject } from 'aurelia-dependency-injection';
 import { HttpClient } from 'aurelia-fetch-client';
 
-import { Book } from './book';
+import { Book } from '../models/book';
 
 @inject(HttpClient)
 export class BookApi {
