@@ -1,4 +1,5 @@
 import { Router, RouterConfiguration } from 'aurelia-router';
+import 'bootstrap';
 
 export class App {
   router: Router;
