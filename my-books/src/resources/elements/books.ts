@@ -1,4 +1,4 @@
-import { bindable, inject } from 'aurelia-framework';
+import { bindable, inject, computedFrom, observable } from 'aurelia-framework';
 
 import { Book } from '../../models/book';
 import { BookApi } from '../../services/book-api';
@@ -6,7 +6,7 @@ import { BookApi } from '../../services/book-api';
 @inject(BookApi)
 export class Books {
   books: Book[];
-  bookTitle: string;
+  @observable bookTitle: string;
 
   constructor(private bookApi: BookApi) {
     this.books = [];
@@ -25,5 +25,14 @@ export class Books {
     this.books.forEach(book => {
       console.log(`${book.title}`);
     });
+  }
+
+  bookTitleChanged(newValue, oldValue) {
+    console.log(`Book title changed, Old Value: ${oldValue}, New Value: ${newValue}`)
+  }
+
+  @computedFrom('bookTitle.length')
+  get canAdd() {
+    return this.bookTitle.length === 0;
   }
 }
