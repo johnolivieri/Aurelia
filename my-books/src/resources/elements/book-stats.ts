@@ -1,9 +1,9 @@
 import { computedFrom, bindable } from 'aurelia-framework';
 
-import { Book } from './../../models/book';
+import { BookModel } from './../../models/book-model';
 
 export class BookStats {
-  @bindable books: Book[];
+  @bindable books: BookModel[];
   @bindable originalNumberOfBooks: number;
 
   @computedFrom('originalNumberOfBooks', 'books.length')

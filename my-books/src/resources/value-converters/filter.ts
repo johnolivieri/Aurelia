@@ -1,13 +1,13 @@
-import { Book } from './../../models/book';
+import { BookModel } from './../../models/book-model';
 
 export class FilterValueConverter {
-  toView(array: Book[], searchTerm: string): Book[] {
+  toView(array: BookModel[], searchTerm: string): BookModel[] {
     return array.filter((item) => {
       return searchTerm && searchTerm.length > 0 ? this.itemMatches(searchTerm, item) : true;
     });
   }
 
-  itemMatches(searchTerm: string, value: Book): boolean {
+  itemMatches(searchTerm: string, value: BookModel): boolean {
     let itemValue = value.title;
 
     if (!itemValue) {
